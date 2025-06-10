@@ -1,0 +1,33 @@
+
+<form [formGroup]="salidaForm" (ngSubmit)="registrarSalida()" novalidate>
+  <div>
+    <label for="codigo">Código:</label>
+    <input id="codigo" type="text" formControlName="codigo" />
+    @if (salidaForm.get('codigo')?.invalid && salidaForm.get('codigo')?.touched) {
+      <div style="color: red;">El código es obligatorio.</div>
+    }
+  </div>
+
+  <div>
+    <label for="cantidad">Cantidad:</label>
+    <input id="cantidad" type="number" formControlName="cantidad"  min="1"/>
+    
+    @if (salidaForm.get('cantidad')?.errors?.['required'] && salidaForm.get('cantidad')?.touched) {
+      <div style="color: red;">La cantidad es obligatoria.</div>
+    }
+
+    @if (salidaForm.get('cantidad')?.errors?.['min'] && salidaForm.get('cantidad')?.touched) {
+      <div style="color: red;">La cantidad debe ser mayor que 0.</div>
+    }
+  </div>
+
+  <div>
+    <label for="motivo">Motivo:</label>
+    <input id="motivo" type="text" formControlName="motivo" />
+    @if (salidaForm.get('motivo')?.invalid && salidaForm.get('motivo')?.touched) {
+      <div style="color: red;">El motivo es obligatorio.</div>
+    }
+  </div>
+
+  <button type="submit">Registrar Salida</button>
+</form>

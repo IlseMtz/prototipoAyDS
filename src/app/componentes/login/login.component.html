@@ -1,0 +1,32 @@
+<div class="titulo-login">Bienvenido al sistema ATO</div>
+<form [formGroup]="loginForm" (ngSubmit)="login()" novalidate>
+  <div>
+    <label for="nombre">Nombre:</label>
+    <input id="nombre" type="text" formControlName="nombre" />
+    <div *ngIf="loginForm.get('nombre')?.invalid && loginForm.get('nombre')?.touched" style="color: red;">
+      El nombre es obligatorio.
+    </div>
+  </div>
+
+  <div>
+    <label for="clave">Clave:</label>
+    <input id="clave" type="password" formControlName="clave" />
+    <div *ngIf="loginForm.get('clave')?.invalid && loginForm.get('clave')?.touched" style="color: red;">
+      La clave es obligatoria.
+    </div>
+  </div>
+
+  <div>
+    <label for="rol">Rol:</label>
+    <select id="rol" formControlName="rol">
+      <option value="" disabled selected>Selecciona un rol</option>
+      <option value="encargado">Encargado</option>
+      <option value="asesor">Asesor de Ventas</option>
+    </select>
+    <div *ngIf="loginForm.get('rol')?.invalid && loginForm.get('rol')?.touched" style="color: red;">
+      El rol es obligatorio.
+    </div>
+  </div>
+
+  <button type="submit">Entrar</button>
+</form>

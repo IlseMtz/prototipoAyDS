@@ -1,0 +1,52 @@
+<h2 class="mt-4">Módulo Eliminar</h2>
+<p>En caso de que se haya registrado mal un producto se puede eliminar, eliminando todo el stock de ese producto</p>
+
+<!--  Formulario de búsqueda -->
+<form class="mb-3 d-flex gap-3 flex-wrap" (ngSubmit)="filtrar()">
+  <div>
+    <input type="text" class="form-control" placeholder="Buscar por código" [(ngModel)]="filtroCodigo" name="codigo" />
+  </div>
+  <div>
+    <input type="text" class="form-control" placeholder="Buscar por nombre" [(ngModel)]="filtroNombre" name="nombre" />
+  </div>
+  <div>
+    <button type="submit" class="btn" style="background-color: #567c8d; color: white;">Buscar</button>
+    <button type="button" class="btn btn-secondary ms-2" (click)="limpiarFiltros()">Limpiar</button>
+  </div>
+</form>
+
+<!--  Tabla con los resultados -->
+<table class="table table-striped table-bordered mt-3">
+  <thead class="table-dark">
+    <tr>
+      <th scope="col">Código</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Cantidad</th>
+      <th scope="col">Precio</th>
+      <th scope="col">Eliminar</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (item of productosFiltrados; track item.codigo) {
+      <tr>
+        <td>{{ item.codigo }}</td>
+        <td>{{ item.nombre }}</td>
+        <td>{{ item.cantidad }}</td>
+        <td>{{ item.precio }}</td>
+        <td class="d-flex justify-content-center">
+          <button class="btn btn-danger btn-sm" (click)="seleccionarProducto(item)">🗑</button>
+        </td>
+      </tr>
+      <tr *ngIf="productoSeleccionado?.codigo === item.codigo">
+        <td colspan="4">
+          <div class="d-flex align-items-center gap-2">
+            <label class="form-label mb-0">Cantidad a Eliminar:</label>
+            <input type="number" class="form-control w-auto" [(ngModel)]="cantidadAEliminar" min="1" />
+            <button class="btn btn-success btn-sm" (click)="eliminar()">Confirmar</button>
+            <button class="btn btn-secondary btn-sm" (click)="cancelar()">Cancelar</button>
+          </div>
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>

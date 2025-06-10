@@ -1,0 +1,18 @@
+<header *ngIf="rolUsuario">
+  <nav>
+
+    <ng-container *ngIf="rolUsuario === 'encargado'">
+      <a routerLink="/registrar-entradas" routerLinkActive="active">Registrar Entradas</a>
+      <a routerLink="/registrar-salidas" routerLinkActive="active">Registrar Salidas</a>
+      <a routerLink="/eliminar-editar" routerLinkActive="active">Eliminar-Editar</a>
+      <a routerLink="/consultar-existencias" routerLinkActive="active">Consultas</a>
+      <a routerLink="/modulo-reportes" routerLinkActive="active">Módulo Reportes</a>
+    </ng-container>
+
+    <ng-container *ngIf="rolUsuario === 'asesor'">
+      <a routerLink="/modulo-ventas" routerLinkActive="active">Módulo Ventas</a>
+    </ng-container>
+
+    <button (click)="cerrarSesion()">Cerrar Sesión</button>
+  </nav>
+</header>
